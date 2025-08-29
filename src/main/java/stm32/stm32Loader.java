@@ -13,6 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// This is for STM32F103x clone found in eBike LSW1108-01-01E controller. See 75-STM32FEBKC6T6.pdf datasheet.
+// STM32FEBKC6T6
+// Flash: 32 kB
+// SRAM: 10 kB
+// Timers: 2
+// Adv timers: 1
+// SPI: 1
+// I2C: 1
+// USART: 2
+// USB: 1
+// CAN: 1
+// GPIOs: 32
+// ADC: 2 (10 channels)
+
 package stm32;
 
 import java.io.IOException;
@@ -56,145 +71,6 @@ public class stm32Loader extends AbstractLibrarySupportLoader {
 		}
 		
 	}
-	
-	private static final RegLabel [] USBFSRegs = {
-			new RegLabel("OTG_FS_GOTGCTL",0x0),
-			new RegLabel("OTG_FS_GOTGINT",0x4),
-			new RegLabel("OTG_FS_GAHBCFG",0x8),
-			new RegLabel("OTG_FS_GUSBCFG",0xc),
-			new RegLabel("OTG_FS_GRSTCTL",0x10),
-			new RegLabel("OTG_FS_GINTSTS",0x14),
-			new RegLabel("OTG_FS_GINTMSK",0x18),
-			new RegLabel("OTG_FS_GRXSTSR",0x1c),
-			new RegLabel("OTG_FS_GRXSTSP",0x20),
-			new RegLabel("OTG_FS_GRXFSIZ",0x24),
-			new RegLabel("OTG_FS_HNPTXFSIZ",0x28),
-			new RegLabel("OTG_FS_HNPTXSTS",0x2c),
-			new RegLabel("OTG_FS_GCCFG",0x38),
-			new RegLabel("OTG_FS_CID",0x3c),
-			new RegLabel("OTG_FS_HPTIZ",0x100),
-			new RegLabel("OTG_FS_DIEPTXF1",0x104),
-			new RegLabel("OTG_FS_DIEPTXF2",0x108),
-			new RegLabel("OTG_FS_DIEPTXF3",0x10c),
-			new RegLabel("OTG_FS_HCFG",0x400),
-			new RegLabel("OTG_FS_HFIR",0x404),
-			new RegLabel("OTG_FS_HFNUM",0x408),
-			new RegLabel("OTG_FS_HPTXSTS",0x410),
-			new RegLabel("OTG_FS_HAINT",0x414),
-			new RegLabel("OTG_FS_HAINTMSK",0x418),
-            new RegLabel("OTG_FS_HPRT", 0x440),
-            new RegLabel("OTG_FS_HCINTx", 0x508),
-            new RegLabel("OTG_FS_HCINTMSKx", 0x50C),
-            new RegLabel("OTG_FS_HCTSIZx", 0x510),
-            new RegLabel("OTG_FS_DCFG", 0x800),
-            new RegLabel("OTG_FS_DCTL", 0x804),
-            new RegLabel("OTG_FS_DSTS", 0x808),
-            new RegLabel("OTG_FS_DIEPMSK", 0x810),
-            new RegLabel("OTG_FS_DOEPMSK", 0x814),
-            new RegLabel("OTG_FS_DAINT", 0x818),
-            new RegLabel("OTG_FS_DAINTMSK", 0x81C),
-            new RegLabel("OTG_FS_DVBUSDIS", 0x828),
-            new RegLabel("OTG_FS_DVBUSPULSE", 0x82C),
-            new RegLabel("OTG_FS_DIEPEMPMSK", 0x834),
-            new RegLabel("OTG_FS_DIEPCTL0", 0x900),
-            new RegLabel("OTG_FS_DIEPINTx", 0x908),
-            new RegLabel("OTG_FS_DIEPTSIZ0", 0x910),
-            new RegLabel("OTG_FS_DIEPTSIZ1", 0x930),
-            new RegLabel("OTG_FS_DIEPTSIZ1", 0x950),
-            new RegLabel("OTG_FS_DIEPTSIZ1", 0x970),
-            new RegLabel("OTG_FS_DOEPCTL0", 0xB00),
-            new RegLabel("OTG_FS_DOEPCTL1", 0xB20),
-            new RegLabel("OTG_FS_DOEPCTL2", 0xB40),
-            new RegLabel("OTG_FS_DOEPCTL3", 0xB60),
-            new RegLabel("OTG_FS_DOEPINT", 0xB08),
-            new RegLabel("OTG_FS_DOEPTSIZ",0xB10),
-	};
-
-	private static final RegLabel [] USBHSRegs = {
-			new RegLabel("OTG_HS_GOTGCTL",0x0),
-			new RegLabel("OTG_HS_GOTGINT",0x4),
-			new RegLabel("OTG_HS_GAHBCFG",0x8),
-			new RegLabel("OTG_HS_GUSBCFG",0xc),
-			new RegLabel("OTG_HS_GRSTCTL",0x10),
-			new RegLabel("OTG_HS_GINTSTS",0x14),
-			new RegLabel("OTG_HS_GINTMSK",0x18),
-			new RegLabel("OTG_HS_GRXSTSR",0x1c),
-			new RegLabel("OTG_HS_GRXSTSP",0x20),
-			new RegLabel("OTG_HS_GRXFSIZ",0x24),
-			new RegLabel("OTG_HS_HNPTXFSIZ",0x28),
-			new RegLabel("OTG_HS_HNPTXSTS",0x2c),
-			new RegLabel("OTG_HS_GCCFG",0x38),
-			new RegLabel("OTG_HS_CID",0x3c),
-			new RegLabel("OTG_HS_HPTIZ",0x100),
-			new RegLabel("OTG_HS_DIEPTXF1",0x104),
-			new RegLabel("OTG_HS_DIEPTXF2",0x108),
-			new RegLabel("OTG_HS_DIEPTXF3",0x10C),
-            new RegLabel("OTG_HS_DIEPTXF5",0x110),
-            new RegLabel("OTG_HS_DIEPTXF6",0x114),
-            new RegLabel("OTG_HS_DIEPTXF7",0x118),
-			new RegLabel("OTG_HS_HCFG",0x400),
-			new RegLabel("OTG_HS_HFIR",0x404),
-			new RegLabel("OTG_HS_HFNUM",0x408),
-			new RegLabel("OTG_HS_HPTXSTS",0x410),
-			new RegLabel("OTG_HS_HAINT",0x414),
-			new RegLabel("OTG_HS_HAINTMSK",0x418),
-            new RegLabel("OTG_HS_HPRT", 0x440),
-            new RegLabel("OTG_HS_HCSPLT", 0x504),
-            new RegLabel("OTG_HS_HCINT", 0x508),
-            new RegLabel("OTG_HS_HCINTMSK", 0x50C),
-            new RegLabel("OTG_HS_HCTSIZx", 0x510),
-            new RegLabel("OTG_HS_HCDMA", 0x514),
-            new RegLabel("OTG_HS_HCCHAR0", 0x500),
-            new RegLabel("OTG_HS_HCCHAR1", 0x520),
-            new RegLabel("OTG_HS_HCCHAR2", 0x540),
-            new RegLabel("OTG_HS_HCCHAR3", 0x560),
-            new RegLabel("OTG_HS_HCCHAR4", 0x580),
-            new RegLabel("OTG_HS_HCCHAR5", 0x5A0),
-            new RegLabel("OTG_HS_HCCHAR6", 0x5c0),
-            new RegLabel("OTG_HS_HCCHAR7", 0x5e0),
-            new RegLabel("OTG_HS_HCCHAR8", 0x600),
-            new RegLabel("OTG_HS_HCCHAR9", 0x620),
-            new RegLabel("OTG_HS_HCCHAR10", 0x640),
-            new RegLabel("OTG_HS_HCCHAR11", 0x660),
-
-            new RegLabel("OTG_HS_DCFG", 0x800),
-            new RegLabel("OTG_HS_DCTL", 0x804),
-            new RegLabel("OTG_HS_DSTS", 0x808),
-            new RegLabel("OTG_HS_DIEPMSK", 0x810),
-            new RegLabel("OTG_HS_DOEPMSK", 0x814),
-            new RegLabel("OTG_HS_DAINT", 0x818),
-            new RegLabel("OTG_HS_DAINTMSK", 0x81C),
-            new RegLabel("OTG_HS_DVBUSDIS", 0x828),
-            new RegLabel("OTG_HS_DVBUSPULSE", 0x82C),
-            new RegLabel("OTG_HS_DIEPEMPMSK", 0x834),
-            new RegLabel("OTG_HS_DEACHINT", 0x838),
-            new RegLabel("OTG_HS_DEACHINTMSK", 0x83C),
-            new RegLabel("OTG_HS_DIEPEACHMSK1", 0x844),
-            new RegLabel("OTG_HS_DOEPEACHMSK1", 0x884),
-
-            new RegLabel("OTG_HS_DIEPCTL0", 0x900),
-            new RegLabel("OTG_HS_DIEPCTL1", 0x920),
-            new RegLabel("OTG_HS_DIEPCTL2", 0x940),
-            new RegLabel("OTG_HS_DIEPCTL3", 0x960),
-            new RegLabel("OTG_HS_DIEPCTL4", 0x980),
-            new RegLabel("OTG_HS_DIEPCTL5", 0x9A0),
-            new RegLabel("OTG_HS_DIEPCTL6", 0x9C0),
-            new RegLabel("OTG_HS_DIEPCTL7", 0x9E0),
-            
-            new RegLabel("OTG_HS_DIEPCTL0", 0x900),
-            new RegLabel("OTG_HS_DIEPINTx", 0x908),
-            new RegLabel("OTG_HS_DIEPTSIZ0", 0x910),
-            new RegLabel("OTG_HS_DIEPTSIZ1", 0x930),
-            new RegLabel("OTG_HS_DIEPTSIZ1", 0x950),
-            new RegLabel("OTG_HS_DIEPTSIZ1", 0x970),
-            new RegLabel("OTG_HS_DOEPCTL0", 0xB00),
-            new RegLabel("OTG_HS_DOEPCTL1", 0xB20),
-            new RegLabel("OTG_HS_DOEPCTL2", 0xB40),
-            new RegLabel("OTG_HS_DOEPCTL3", 0xB60),
-            new RegLabel("OTG_HS_DOEPINT", 0xB08),
-            new RegLabel("OTG_HS_DOEPTSIZ",0xB10),
-	};
-	
 
 	private static class STM32InterruptVector{
 		String name;
@@ -260,45 +136,6 @@ public class stm32Loader extends AbstractLibrarySupportLoader {
 			new STM32InterruptVector("EXTI15_10",0xE0),
 			new STM32InterruptVector("RTC_Alarm",0xE4),
 			new STM32InterruptVector("OTG_FS_WKUP",0xE8),
-			new STM32InterruptVector("TIM8_BRK_TIM12",0xEC),
-			new STM32InterruptVector("TIM8_UP_TIM13",0xF0),
-			new STM32InterruptVector("TIM8_TRG_COM_TIM14",0xF4),
-			new STM32InterruptVector("TIM8_CC",0xF8),
-			new STM32InterruptVector("DMA1_Stream7",0xFC),
-			new STM32InterruptVector("FSMC",0x100),
-			new STM32InterruptVector("SDIO",0x104),
-			new STM32InterruptVector("TIM5",0x108),
-			new STM32InterruptVector("SPI3",0x10C),
-			new STM32InterruptVector("UART4",0x110),
-			new STM32InterruptVector("UART5",0x114),
-			new STM32InterruptVector("TIM6_DAC",0x118),
-			new STM32InterruptVector("TIM7",0x11c),
-			new STM32InterruptVector("DMA2_Stream0",0x120),
-			new STM32InterruptVector("DMA2_Stream1",0x124),
-			new STM32InterruptVector("DMA2_Stream2",0x128),
-			new STM32InterruptVector("DMA2_Stream3",0x12C),
-			new STM32InterruptVector("DMA2_Stream4",0x130),
-			new STM32InterruptVector("ETH",0x134),
-			new STM32InterruptVector("ETH_WKUP",0x138),
-			new STM32InterruptVector("CAN2_TX",0x13C),
-			new STM32InterruptVector("CAN2_RX0",0x140),
-			new STM32InterruptVector("CAN2_RX1",0x144),
-			new STM32InterruptVector("CAN2_SCE",0x148),
-			new STM32InterruptVector("OTG_FS",0x14C),
-			new STM32InterruptVector("DMA2_Stream5",0x150),
-			new STM32InterruptVector("DMA2_Stream6",0x154),
-			new STM32InterruptVector("DMA2_Stream7",0x158),
-			new STM32InterruptVector("USART6",0x15C),
-			new STM32InterruptVector("I2C3_EV",0x160),
-			new STM32InterruptVector("I2C3_ER",0x164),
-			new STM32InterruptVector("OTG_HS_EP1_OUT",0x168),
-			new STM32InterruptVector("OTG_HS_EP1_IN",0x16C),
-			new STM32InterruptVector("OTG_HS_WKUP",0x170),
-			new STM32InterruptVector("OTG_HS",0x174),
-			new STM32InterruptVector("DCMI",0x178),
-			new STM32InterruptVector("CRYP",0x17C),
-			new STM32InterruptVector("HACH_RNG",0x180),
-		
 		};	
 	
 	private static class STM32MemRegion {
@@ -319,79 +156,49 @@ public class stm32Loader extends AbstractLibrarySupportLoader {
 	}
 	// Pull these regions from the datasheet
 	private static final STM32MemRegion [] STM32MEM = {
-			new STM32MemRegion("TIM2",0x40000000,0x3FF,true,true,false),
-			new STM32MemRegion("TIM3",0x40000400,0x3FF,true,true,false),
-			new STM32MemRegion("TIM4",0x40000800,0x3FF,true,true,false),
-			new STM32MemRegion("TIM5",0x40000C00,0x3FF,true,true,false),
-			new STM32MemRegion("TIM6",0x40001000,0x3FF,true,true,false),
-			new STM32MemRegion("TIM7",0x40001400,0x3FF,true,true,false),
-			new STM32MemRegion("TIM12",0x40001800,0x3FF,true,true,false),
-			new STM32MemRegion("TIM13",0x40001C00,0x3FF,true,true,false),
-			new STM32MemRegion("TIM14",0x40002000,0x3FF,true,true,false),
-			new STM32MemRegion("RTC/BKP",0x40002800,0x3FF,true,true,false),
-			new STM32MemRegion("WWDG",0x40002C00,0x3FF,true,true,false),
-			new STM32MemRegion("IWDG",0x40003000,0x3FF,true,true,false),
-			new STM32MemRegion("SPI2/I2S2",0x40003800,0x3FF,true,true,false),
-			new STM32MemRegion("SPI3/I2S3",0x40003C00,0x3FF,true,true,false),
-			new STM32MemRegion("USART2",0x40004400,0x3FF,true,true,false),
-			new STM32MemRegion("USART3",0x40004800,0x3FF,true,true,false),
-			new STM32MemRegion("USART4",0x40004C00,0x3FF,true,true,false),
-			new STM32MemRegion("USART5",0x40005000,0x3FF,true,true,false),
-			new STM32MemRegion("I2C1",0x40005400,0x3FF,true,true,false),
-			new STM32MemRegion("I2C2",0x40005800,0x3FF,true,true,false),
-			new STM32MemRegion("I2C3",0x40005C00,0x3FF,true,true,false),
-			new STM32MemRegion("CAN1",0x40006400,0x3FF,true,true,false),
-			new STM32MemRegion("CAN2",0x40006800,0x3FF,true,true,false),
-			new STM32MemRegion("PWR",0x40007000,0x3FF,true,true,false),
-			new STM32MemRegion("DAC",0x40007400,0x3FF,true,true,false),
-			new STM32MemRegion("TIM1",0x40010000,0x3FF,true,true,false),
-			new STM32MemRegion("TIM8",0x40010400,0x3FF,true,true,false),
-			new STM32MemRegion("USART1",0x40011000,0x3FF,true,true,false),
-			new STM32MemRegion("USART6",0x40011400,0x3FF,true,true,false),
-			new STM32MemRegion("ADC1/2/3",0x40012000,0x3FF,true,true,false),
-			new STM32MemRegion("SDIO",0x40012C00,0x3FF,true,true,false),
-			new STM32MemRegion("SPI1",0x40013000,0x3FF,true,true,false),
-			new STM32MemRegion("SYSCFG",0x40013800,0x3FF,true,true,false),
-			new STM32MemRegion("EXTI",0x40013C00,0x3FF,true,true,false),
-			new STM32MemRegion("TIM9",0x40014000,0x3FF,true,true,false),
-			new STM32MemRegion("TIM10",0x40014400,0x3FF,true,true,false),
-			new STM32MemRegion("TIM11",0x40014800,0x3FF,true,true,false),
-			new STM32MemRegion("GPIOA",0x40020000,0x3FF,true,true,false),
-			new STM32MemRegion("GPIOB",0x40020400,0x3FF,true,true,false),
-			new STM32MemRegion("GPIOC",0x40020800,0x3FF,true,true,false),
-			new STM32MemRegion("GPIOD",0x40020c00,0x3FF,true,true,false),
-			new STM32MemRegion("GPIOE",0x40021000,0x3FF,true,true,false),
-			new STM32MemRegion("GPIOF",0x40021400,0x3FF,true,true,false),
-			new STM32MemRegion("GPIOG",0x40021800,0x3FF,true,true,false),
-			new STM32MemRegion("GPIOH",0x40021c00,0x3FF,true,true,false),
-			new STM32MemRegion("GPIOI",0x40022000,0x3FF,true,true,false),
-			new STM32MemRegion("CRC",0x40023000,0x3FF,true,true,false),
-			new STM32MemRegion("RCC",0x40023800,0x3FF,true,true,false),
-			new STM32MemRegion("Flash Interface Register",0x40023C00,0x3FF,true,true,false),
-			new STM32MemRegion("BKPSRAM",0x40024000,0x3FF,true,true,false),
-			new STM32MemRegion("DMA1",0x40026000,0x3FF,true,true,false),
-			new STM32MemRegion("DMA2",0x40026400 ,0x3FF,true,true,false),
-			new STM32MemRegion("Ethernet Mac",0x40028000 ,0x13FF,true,true,false),
-			new STM32MemRegion("USB OTG HS",0x40040000 ,0x3FFFF,true,true,false),
-			new STM32MemRegion("USB OTG FS",0x50000000 ,0x3FFFF,true,true,false),
-			new STM32MemRegion("DCMI",0x50050000 ,0x3FF,true,true,false),
-			new STM32MemRegion("CRYP",0x50060000 ,0x3FF,true,true,false),
-			new STM32MemRegion("HASH",0x50060400 ,0x3FF,true,true,false),
-			new STM32MemRegion("RNG",0x50060800 ,0x3FF,true,true,false),
-			new STM32MemRegion("FSMC Control Register",0xA0000000 ,0xFFF,true,true,false),
-			new STM32MemRegion("SRAM",0x20000000 ,0x20000,true,true,true),
-			new STM32MemRegion("System Memory",0x1FFF0000 ,0x77FF,true,true,true),
+			new STM32MemRegion("TIM2",      0x40000000,0x400,true,true,false),
+			new STM32MemRegion("TIM3",      0x40000400,0x400,true,true,false),
+			new STM32MemRegion("TIM4",      0x40000800,0x400,true,true,false),
+			new STM32MemRegion("RTC",       0x40002800,0x400,true,true,false),
+			new STM32MemRegion("WWDG",      0x40002C00,0x400,true,true,false),
+			new STM32MemRegion("IWDG",      0x40003000,0x400,true,true,false),
+			new STM32MemRegion("SPI2",      0x40003800,0x400,true,true,false),
+			new STM32MemRegion("USART2",    0x40004400,0x400,true,true,false),
+			new STM32MemRegion("USART3",    0x40004800,0x400,true,true,false),
+			new STM32MemRegion("I2C1",      0x40005400,0x400,true,true,false),
+			new STM32MemRegion("I2C2",      0x40005800,0x400,true,true,false),
+			new STM32MemRegion("USB_REGS",  0x40005C00,0x400,true,true,false),
+			new STM32MemRegion("USB_RAM",   0x40006000,0x400,true,true,false),
+			new STM32MemRegion("CAN",       0x40006400,0x400,true,true,false),
+			new STM32MemRegion("BKP",       0x40006C00,0x400,true,true,false),
+			new STM32MemRegion("PWR",       0x40007000,0x400,true,true,false),
+			new STM32MemRegion("AFIO",      0x40010000,0x400,true,true,false),
+			new STM32MemRegion("EXTI",      0x40010400,0x400,true,true,false),
+			new STM32MemRegion("GPIOA",     0x40010800,0x400,true,true,false),
+			new STM32MemRegion("GPIOB",     0x40010C00,0x400,true,true,false),
+			new STM32MemRegion("GPIOC",     0x40011000,0x400,true,true,false),
+			new STM32MemRegion("GPIOD",     0x40011400,0x400,true,true,false),
+			new STM32MemRegion("GPIOE",     0x40011800,0x400,true,true,false),
+			new STM32MemRegion("ADC1",      0x40012400,0x400,true,true,false),
+			new STM32MemRegion("ADC2",      0x40012800,0x400,true,true,false),
+			new STM32MemRegion("TIM1",      0x40012C00,0x400,true,true,false),
+			new STM32MemRegion("SPI1",      0x40013000,0x400,true,true,false),
+			new STM32MemRegion("USART1",    0x40013800,0x400,true,true,false),
+			new STM32MemRegion("DMA",       0x40020000,0x400,true,true,false),
+			new STM32MemRegion("RCC",       0x40021000,0x400,true,true,false),
+
 			// TODO: Add the ability to select and load these in from the loader...
-			new STM32MemRegion("OTP",0x1FFF7800 ,0x20F,true,false,false),
-			new STM32MemRegion("Option Bytes",0x1FFFC000 ,0xF,true,false,false),
+			new STM32MemRegion("FLASH",     0x40022000,0x400,true,true,false),
+			new STM32MemRegion("SRAM",      0x20000000 ,0x2800,true,true,true),
+			new STM32MemRegion("System Memory",0x1FFFF000 ,0x800,true,true,true),
+			new STM32MemRegion("Option Bytes",0x1FFFF800 ,0x10,true,false,false),
 	};
 	@Override
 	public String getName() {
 
 		// TODO: Name the loader.  This name must match the name of the loader in the .opinion 
 		// files.
-
-		return "STM32F2";
+		return "STM32FEBKxx";
 	}
 
 	@Override
@@ -420,7 +227,11 @@ public class stm32Loader extends AbstractLibrarySupportLoader {
 		// First we loop through our memory map that we created:
 		for(STM32MemRegion memregion: STM32MEM)	{
 			try {
-				mem.createUninitializedBlock(memregion.name, api.toAddr(memregion.addr), memregion.size, false);
+				MemoryBlock blk = mem.createUninitializedBlock(memregion.name, api.toAddr(memregion.addr), memregion.size, false);
+                blk.setRead(memregion.read);
+                blk.setWrite(memregion.write);
+                blk.setExecute(memregion.execute);
+                blk.setVolatile(true);
 				api.createLabel(api.toAddr(memregion.addr),memregion.name.replace(" ","_"),false);
 			} catch (LockException e) {
 				// TODO Auto-generated catch block
@@ -440,7 +251,10 @@ public class stm32Loader extends AbstractLibrarySupportLoader {
 			}
 		}
 		try {
-			mem.createInitializedBlock("Main Memory", api.toAddr(0x8000000), inStream, 0xFFFFF, monitor, false);
+			MemoryBlock blk = mem.createInitializedBlock("Main Memory", api.toAddr(0x8000000), inStream, 0x8000, monitor, false);
+            blk.setRead(true);
+            blk.setWrite(false);
+            blk.setExecute(true);
 		} catch (LockException | MemoryConflictException | AddressOverflowException | CancelledException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -451,7 +265,7 @@ public class stm32Loader extends AbstractLibrarySupportLoader {
 			// Make pointer, label it as stack start
 			int stackAddr = mem.getInt(api.toAddr(0x8000000));
 			Data stackAddrData = api.createDWord(api.toAddr(0x8000000));
-			api.createLabel(api.toAddr(stackAddr),"_STACK_BEGIN",true);
+			api.createLabel(api.toAddr(stackAddr),"bootloader_stack",true);
 			api.createMemoryReference(stackAddrData, api.toAddr(stackAddr), ghidra.program.model.symbol.RefType.DATA);
 			
 			// Mark the entry point of the binary, also referenced in the datasheet on page 59
@@ -474,13 +288,6 @@ public class stm32Loader extends AbstractLibrarySupportLoader {
 					// This is ugly, need to fix
 					continue;
 				}
-			}
-			
-			for(RegLabel rlabel:USBHSRegs) {
-				api.createLabel(api.toAddr(rlabel.addr+0x40040000),rlabel.label,true);
-			}
-			for(RegLabel rlabel:USBFSRegs) {
-				api.createLabel(api.toAddr(rlabel.addr+0x50000000),rlabel.label,true);
 			}
 			
 		} catch (Exception e) {
